@@ -1,0 +1,70 @@
+<div class="registration-container">
+    <div>
+
+   
+    <h1>Registration Page</h1>
+    <form [formGroup]="registrationForm">
+        <div class="form-container">
+            <div class="form-field">
+                <label for="username">Username</label>
+                <input id="username" type="text" formControlName="username">
+                <p *ngIf="registrationForm.controls['username'].touched && registrationForm.controls['username'].errors">Username is required!</p>
+            </div>
+            <div class="form-field">
+                <label for="email">Email</label>
+                <input id="email" type="text" formControlName="email">
+                <p *ngIf="registrationForm.controls['email'].touched && registrationForm.controls['email'].errors">Email is required!</p>
+            </div>
+            <div class="form-field">
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName="password">
+                <p *ngIf="registrationForm.controls['password'].touched && registrationForm.controls['password'].errors">Password is required</p>
+            </div><br>
+            <div class="form-field">
+            <button (click)="saveUserDataInStorage()" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+    <table *ngIf="posts && status==='table'">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>View</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+           
+        </thead>
+        <tbody>
+           <tr *ngFor="let post of posts">
+               <td>{{ post.id }}</td>
+               <td>{{ post.title }}</td>
+               <td>{{ post.body }}</td>
+               <td><button (click)="viewPost(post.id)">View</button></td>
+               <td><button>Update</button></td>
+               <td><button>Delete</button></td>
+               </tr>
+          
+        </tbody>
+    </table>
+    <table *ngIf="post && status === 'view'">
+        <tr>
+            <th>Id</th>
+            <td>{{ post.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ post.title }}</td>
+         </tr>
+        <tr>
+            <th>Body</th>
+            <td>{{ post.body }}</td>
+        </tr>
+        <tr>
+            <th><button (click)="status = 'table'">Back to table</button></th>
+        </tr>
+    </table>
+</div>
+</div>
